@@ -36,6 +36,7 @@ ScatterJS.scatter.connect("test")
             const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
             console.log("====== account")
             console.log(account);
+            
             const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };
             console.log("====== transactionOptions")
             console.log(transactionOptions);
@@ -48,10 +49,17 @@ ScatterJS.scatter.connect("test")
 
             console.log("====== eos")
             console.log(eos);
-            // eos.transfer('alice', 'bob', '1.0000 SYS', '', options)
         })
+        .catch((error)=>{
+            console.log("====== Identtity Error")
+            console.log(error)
+        });
             
 
             window.ScatterJS = null;
 
+})
+.catch((error)=>{
+    console.log("====== Connection Error")
+    console.log(error)
 });
