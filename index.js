@@ -29,7 +29,11 @@ ScatterJS.scatter.connect("test").then(connected => {
         console.log("====== scatter")
         console.log(scatter);
 
-            const eos = scatter.eos( network, Eos, options );
+            // Using a Proxy Provider
+            //const eos = scatter.eos( network, Eos, options );
+            
+            // Using a Hook Provider
+            const eos = Eos({ httpEndpoint:'https://api.eosnewyork.io', signatureProvider:scatter.eosHook(network) })
 
         console.log("====== eos")
         console.log(eos);
