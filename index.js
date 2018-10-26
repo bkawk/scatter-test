@@ -14,37 +14,27 @@ ScatterJS.scatter.connect("worbli")
         if(!connected) return false;
         scatter = ScatterJS.scatter;
         scatter.getIdentity(requiredFields)
-        .then(() => {       
-            eos = scatter.eos( network, Eos, options );
-        })
-        .catch((error)=>{
-            console.log(error)
-        });
+        .then(() => eos = scatter.eos( network, Eos, options ))
+        .catch((error)=>console.log(error));
 })
-.catch((error)=>{
-    console.log(error)
-});
+.catch((error)=>console.log(error));
+
 
 function transfer(){
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
     const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };  
-
     eos.transfer(account.name, 'webcomponent', '0.1000 EOS', '', transactionOptions)
     .then(trx => console.log('trx', trx))
     .catch(err => console.error(err))           
 }
 
-
 function callContract(){
-    
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
     const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };
-
     const contractAddress = 'worbliworbli';
     const owner = account.name;
     const securitycode = document.getElementById("securitycode").value;
     const args = {owner, securitycode}
-
     eos.transaction([contractAddress], contracts => {
         contracts[contractAddress].reg(args, transactionOptions)
      })
