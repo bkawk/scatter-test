@@ -49,6 +49,9 @@ ScatterJS.scatter.connect("test")
 
             console.log("====== eos")
             console.log(eos);
+
+            console.log(account.name)
+            eos.transfer(account.name, 'helloeosblox', '0.0100 EOS', '', transactionOptions)
         })
         .catch((error)=>{
             console.log("====== Identtity Error")
