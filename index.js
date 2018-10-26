@@ -29,7 +29,7 @@ function transfer(){
     const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
     const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };  
 
-    eos.transfer(account.name, 'helloeosblox', '0.0100 EOS', '', transactionOptions)
+    eos.transfer(account.name, 'webcomponent', '0.1000 EOS', '', transactionOptions)
     .then(trx => console.log('trx', trx))
     .catch(err => console.error(err))           
 }
