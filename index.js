@@ -9,8 +9,10 @@ const options = {};
 
 console.log("====== ScatterJS")
 console.log(ScatterJS) 
+
 console.log("====== network")
 console.log(network) 
+
 console.log("====== options")
 console.log(options) 
 
