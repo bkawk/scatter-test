@@ -1,4 +1,4 @@
-
+let scatter, eos;
 const network = {
     blockchain:'eos',
     protocol:'https',
@@ -8,61 +8,37 @@ const network = {
 }
 const options = {expireInSeconds:60};
 const requiredFields = {accounts:[network]};
-
-console.log("====== ScatterJS")
-console.log(ScatterJS) 
-
-console.log("====== network")
-console.log(network) 
-
-console.log("====== options")
-console.log(options) 
-
 ScatterJS.plugins(new ScatterEOS())
-ScatterJS.scatter.connect("test")
+ScatterJS.scatter.connect("worbli")
 .then(connected => {
-
-        console.log("====== connected")
-        console.log(connected);
-
         if(!connected) return false;
-        const scatter = ScatterJS.scatter;
-
-        console.log("====== scatter")
-        console.log(scatter);
-
+        scatter = ScatterJS.scatter;
         scatter.getIdentity(requiredFields)
-        .then(() => {
-            const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
-            console.log("====== account")
-            console.log(account);
-            
-            const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };
-            console.log("====== transactionOptions")
-            console.log(transactionOptions);
-            
-            //Using a Proxy Provider
-            const eos = scatter.eos( network, Eos, options );
-            
-            // Using a Hook Provider
-            //const eos = Eos({ httpEndpoint:'https://api.eosnewyork.io', signatureProvider:scatter.eosHook(network) })
-
-            console.log("====== eos")
-            console.log(eos);
-
-            console.log(account.name)
-            eos.transfer(account.name, 'helloeosblox', '0.0100 EOS', '', transactionOptions)
+        .then(() => {       
+            eos = scatter.eos( network, Eos, options );
         })
         .catch((error)=>{
-            console.log("====== Identtity Error")
             console.log(error)
         });
-            
-
-            window.ScatterJS = null;
-
 })
 .catch((error)=>{
-    console.log("====== Connection Error")
     console.log(error)
 });
+
+function transfer(){
+    const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+    const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };  
+    eos.transfer(account.name, 'helloeosblox', '0.0100 EOS', '', transactionOptions)          
+}
+
+
+function callContract(){
+    console.log('WAIT FOR IT')
+    const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+    const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };
+    eos.transaction(['worbliworbli'], push => {
+        push.worbliworbli.reg('somestring', '1234567890123456')
+     })
+    .then(trx => console.log('trx', trx))
+    .catch(err => console.error(err))     
+}
