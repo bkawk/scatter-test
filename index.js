@@ -20,20 +20,20 @@ console.log(options)
 
 ScatterJS.scatter.connect("test").then(connected => {
 
-console.log("====== connected")
-console.log(connected);
+        console.log("====== connected")
+        console.log(connected);
 
-    if(!connected) return false;
-    const scatter = ScatterJS.scatter;
+            if(!connected) return false;
+            const scatter = ScatterJS.scatter;
 
-console.log("====== scatter")
-console.log(scatter);
+        console.log("====== scatter")
+        console.log(scatter);
 
-    const eos = scatter.eos( network, Eos, options );
+            const eos = scatter.eos( network, Eos, options );
 
-console.log("====== eos")
-console.log(eos);
+        console.log("====== eos")
+        console.log(eos);
 
-    window.ScatterJS = null;
+            window.ScatterJS = null;
 
 });
