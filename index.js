@@ -1,3 +1,5 @@
+ScatterJS.plugins(new ScatterEOS())
+
 const network = {
     blockchain:'eos',
     protocol:'https',
@@ -16,7 +18,7 @@ console.log(network)
 console.log("====== options")
 console.log(options) 
 
-ScatterJS.scatter.connect("worbli").then(connected => {
+ScatterJS.scatter.connect("test").then(connected => {
 
 console.log("====== connected")
 console.log(connected);
