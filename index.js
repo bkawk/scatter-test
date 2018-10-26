@@ -11,11 +11,11 @@ const reqFields = {accounts:[network]};
 ScatterJS.plugins(new ScatterEOS());
 ScatterJS.scatter.connect("worbli")
 .then(connected => {
-        if (!connected) return false;
-        scatter = ScatterJS.scatter;
-        scatter.getIdentity(reqFields)
-        .then(() => eos = scatter.eos(network, Eos, options))
-        .catch(error => console.log(error));
+    if (!connected) return false;
+    scatter = ScatterJS.scatter;
+    scatter.getIdentity(reqFields)
+    .then(() => eos = scatter.eos(network, Eos, options))
+    .catch(error => console.log(error));
 })
 .catch(error => console.log(error));
 
